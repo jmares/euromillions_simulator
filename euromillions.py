@@ -1,13 +1,21 @@
 import random
 from time import localtime, strftime
+import datetime
 
-print('\nEuromillions\n')
+print('\n******************************')
+print('**  Euromillions Simulator  **')
+print('******************************\n')
+
 print(strftime("%H:%M:%S", localtime()) + '\tStart')
+
+begin_time = datetime.datetime.now()
 numbers = list()
 stars = list()
 draws = dict()
 amount = 0
-simulations = 10_000_000
+simulations = 1_000_000
+display_results = 25
+display_status_draws = 100_000
 
 print(strftime("%H:%M:%S", localtime()) + '\tDraws')
 
@@ -26,7 +34,7 @@ while amount < simulations:
     amount += 1
     draw = ''.join(str(numbers)) + ''.join(str(stars))
     draws[draw] = draws.get(draw, 0) + 1
-    if amount % 250000 == 0 : print('{:10d}'.format(amount))
+    if amount % display_status_draws == 0 : print('{:10d}'.format(amount))
 
 draws_list = list()
 
@@ -38,12 +46,14 @@ for key, val in draws.items():
 draws.clear()
 del draws
 
-print(strftime("%H:%M:%S", localtime()) + '\tSorting ...')
+print(strftime("%H:%M:%S", localtime()) + '\tSorting ...\n')
 
 draws_list.sort(reverse=True)
 
-for draw in draws_list[:25]:
+print(strftime("%H:%M:%S", localtime()) + f"\tDisplay top {display_results} results:\n")
+for draw in draws_list[:display_results]:
     print(draw[0], ':', draw[1])
 
 print(strftime("%H:%M:%S", localtime()) + '\tEnd')
-
+end_time = datetime.datetime.now()
+print("Execution time (h:m:s):", str(end_time - begin_time).split('.')[0])
