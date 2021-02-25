@@ -16,8 +16,8 @@ DISPLAY_STATUS_DRAWS = 50_000  # display a status message every x draws
 
 print(strftime("%H:%M:%S", localtime()) + '\tDraws')
 
-#while amount < SIMULATIONS:
 for simulation in range(SIMULATIONS):
+
     numbers = []
     while len(numbers) < 5:
         number = random.randint(1,50)
@@ -30,11 +30,7 @@ for simulation in range(SIMULATIONS):
 
     numbers.sort()
     stars.sort()
-    #amount += 1
-    #draw = ''.join(str(numbers)) + ''.join(str(stars))
-    #draw = str(numbers) + str(stars)
-    #draw = ', '.join(numbers) + ' | ' + ', '.join(stars)
-    draw = f"{numbers}{stars}"
+    draw = f"{numbers}{stars}" # example [16, 27, 30, 34, 39][7, 8]
 
     draws[draw] = draws.get(draw, 0) + 1
     if simulation % DISPLAY_STATUS_DRAWS == 0 : print('{:10d}'.format(simulation))
